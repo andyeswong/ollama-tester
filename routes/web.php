@@ -51,6 +51,7 @@ Route::prefix('ollama')->name('ollama.')->middleware(['auth'])->group(function (
     Route::prefix('servers/{server}')->name('tests.')->group(function () {
         // Compare tests route must come before the wildcard route
         Route::get('tests/compare', [OllamaModelTestController::class, 'compareResults'])->name('compare');
+        Route::get('tests/compare/download-csv', [OllamaModelTestController::class, 'downloadComparisonCsv'])->name('compare.download-csv');
         Route::get('tests/create', [OllamaModelTestController::class, 'create'])->name('create');
         Route::post('tests', [OllamaModelTestController::class, 'store'])->name('store');
         Route::get('tests', [OllamaModelTestController::class, 'index'])->name('index');
