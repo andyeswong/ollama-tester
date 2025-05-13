@@ -271,7 +271,7 @@ class OllamaService
         $server = $tests->first()->server;
         $client = new Client([
             'base_uri' => $server->url,
-            'timeout' => 60,
+            'timeout' => env('OLLAMA_REQUEST_TIMEOUT', 300),
         ]);
         
         $promises = [];

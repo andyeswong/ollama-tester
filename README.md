@@ -92,6 +92,22 @@ npm run build
 php artisan serve
 ```
 
+## ⚙️ Configuration Options
+
+### Environment Variables
+The application can be configured using the following environment variables in your `.env` file:
+
+- `APP_ENV`: Set to `production` to enforce HTTPS
+- `OLLAMA_REQUEST_TIMEOUT`: Maximum time (in seconds) for Ollama API requests before timeout (default: 300 seconds)
+- `DB_CONNECTION`, `DB_HOST`, etc.: Database configuration options
+- `QUEUE_CONNECTION`: Queue driver for background jobs
+
+### Request Timeouts
+By default, requests to Ollama servers will timeout after 300 seconds (5 minutes). For models that require longer processing times:
+
+1. Set `OLLAMA_REQUEST_TIMEOUT` in your `.env` file to a higher value (in seconds)
+2. For very large models or complex prompts, consider increasing this to 600 or more
+
 ## 📖 Usage
 
 ### Adding an Ollama Server
