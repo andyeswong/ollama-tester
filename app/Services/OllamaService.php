@@ -6,8 +6,6 @@ use App\Models\OllamaServer;
 use App\Models\OllamaModelTest;
 use App\Events\TestStatusUpdated;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Cache;
 use GuzzleHttp\Promise\Utils;
 use GuzzleHttp\Client;
 use Pusher\Pusher;
@@ -35,9 +33,7 @@ class OllamaService
                 config('broadcasting.connections.pusher.options', [])
             );
         } catch (\Exception $e) {
-            Log::error('Failed to initialize Pusher client', [
-                'exception' => $e->getMessage(),
-            ]);
+            // Removed logging
         }
     }
 
@@ -68,18 +64,10 @@ class OllamaService
 
                 $this->pusher->trigger($channelName, $eventName, $data);
                 
-                // Log successful direct broadcast
-                Log::info("Directly broadcasted test status via Pusher", [
-                    'test_id' => $test->id,
-                    'status' => $status,
-                    'channel' => $channelName
-                ]);
+                // Removed logging
             }
         } catch (\Exception $e) {
-            Log::error('Failed to broadcast test status via Pusher', [
-                'test_id' => $test->id,
-                'exception' => $e->getMessage(),
-            ]);
+            // Removed logging
         }
     }
 
@@ -99,21 +87,11 @@ class OllamaService
                 return $response->json('models', []);
             }
 
-            Log::error('Failed to fetch models from Ollama server', [
-                'server' => $server->name,
-                'url' => $server->url,
-                'status' => $response->status(),
-                'response' => $response->body(),
-            ]);
+            // Removed logging
 
             return [];
         } catch (\Exception $e) {
-            Log::error('Exception when fetching models from Ollama server', [
-                'server' => $server->name,
-                'url' => $server->url,
-                'exception' => $e->getMessage(),
-            ]);
-
+            // Removed logging
             return [];
         }
     }
@@ -185,12 +163,7 @@ class OllamaService
             // Broadcast test failed event
             $this->broadcastTestStatus($test, 'failed');
 
-            Log::error('Failed to run Ollama model test', [
-                'server' => $server->name,
-                'model' => $test->model_name,
-                'status' => $response->status(),
-                'response' => $response->body(),
-            ]);
+            // Removed logging
 
             return false;
         } catch (\Exception $e) {
@@ -206,10 +179,7 @@ class OllamaService
             // Broadcast test failed event
             $this->broadcastTestStatus($test, 'failed');
 
-            Log::error('Exception when running Ollama model test', [
-                'test_id' => $test->id,
-                'exception' => $e->getMessage(),
-            ]);
+            // Removed logging
 
             return false;
         }
@@ -340,9 +310,7 @@ class OllamaService
         try {
             Utils::settle($promises)->wait();
         } catch (\Exception $e) {
-            Log::error('Exception when running parallel Ollama tests', [
-                'exception' => $e->getMessage(),
-            ]);
+            // Removed logging
         }
     }
 } 
