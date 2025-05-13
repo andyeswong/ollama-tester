@@ -92,6 +92,11 @@ npm run build
 php artisan serve
 ```
 
+10. Start the queue worker with extended timeout:
+```bash
+./start-queue-worker.sh
+```
+
 ## ⚙️ Configuration Options
 
 ### Environment Variables
@@ -107,6 +112,18 @@ By default, requests to Ollama servers will timeout after 300 seconds (5 minutes
 
 1. Set `OLLAMA_REQUEST_TIMEOUT` in your `.env` file to a higher value (in seconds)
 2. For very large models or complex prompts, consider increasing this to 600 or more
+
+### Queue Worker Timeouts
+The application uses Laravel's queue system to process Ollama requests in the background. For long-running tests:
+
+1. Use the provided script to start the queue worker with an extended timeout:
+   ```bash
+   ./start-queue-worker.sh
+   ```
+
+2. The default timeout in the script is set to 1 hour (3600 seconds). Modify the `TIMEOUT` variable in the script if needed.
+
+3. If you encounter `ProcessTimedOutException` errors, this indicates the queue worker is timing out and you should use this script.
 
 ## 📖 Usage
 
