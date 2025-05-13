@@ -1,72 +1,154 @@
 # Ollama Tester
 
-This is a Laravel 12 application for testing [Ollama](https://ollama.ai/) servers. It allows you to:
+A comprehensive tool for testing and benchmarking Ollama models. This application helps you evaluate model performance, manage multiple Ollama servers, and collect detailed metrics during testing.
 
-1. Connect to multiple Ollama servers
-2. List available models on each server
-3. Test single models with various prompts
-4. Test multiple models with the same prompt simultaneously
-5. Run performance tests with multiple iterations
-6. Compare responses and performance between different models
+## 🌟 Features
 
-## Requirements
+### Server Management
+- Connect and manage multiple Ollama servers
+- Monitor server health and status
+- Track server resource usage
 
-- PHP 8.2+
+### Comprehensive Testing
+- Test individual models with customizable prompts
+- Compare performance between different models
+- Evaluate model responses for accuracy and quality
+- Collect detailed performance metrics
+
+### Stress Testing
+- Run parallel tests to evaluate server capacity
+- Determine optimal model configurations
+- Identify performance bottlenecks
+
+### Real-time Monitoring
+- Watch test results update in real-time
+- Track token generation speeds
+- Monitor system resource utilization during tests
+
+### Performance Metrics
+- Tokens per second (TPS) calculation
+- Response generation time
+- Token count analysis
+- CPU, Memory, and GPU utilization metrics
+
+## 🚀 Getting Started
+
+### Prerequisites
+- PHP 8.1 or higher
 - Composer
-- Node.js & NPM
-- SQLite or another database system (MySQL, PostgreSQL)
+- Node.js and NPM
+- Ollama running on at least one server
 
-## Installation
+### Installation
 
-1. Clone the repository
-2. Install PHP dependencies: `composer install`
-3. Install frontend dependencies: `npm install`
-4. Build assets: `npm run build`
-5. Configure your database in `.env`
-6. Run migrations: `php artisan migrate`
-7. Start the server: `php artisan serve`
-8. Start the queue worker: `php artisan queue:work --queue=ollama-tests`
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/ollama-tester.git
+cd ollama-tester
+```
 
-## Usage
+2. Install PHP dependencies:
+```bash
+composer install
+```
+
+3. Install JavaScript dependencies:
+```bash
+npm install
+```
+
+4. Copy the environment file:
+```bash
+cp .env.example .env
+```
+
+5. Generate application key:
+```bash
+php artisan key:generate
+```
+
+6. Configure your database in the `.env` file:
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=ollama_tester
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+7. Run migrations:
+```bash
+php artisan migrate
+```
+
+8. Build assets:
+```bash
+npm run build
+```
+
+9. Start the development server:
+```bash
+php artisan serve
+```
+
+## 📖 Usage
 
 ### Adding an Ollama Server
+1. Register or login to your account
+2. Navigate to "Servers" in the dashboard
+3. Click "Add Server"
+4. Enter your Ollama server URL (e.g., http://localhost:11434)
+5. Save the server configuration
 
-1. Navigate to the home page
-2. Click "Add Server"
-3. Enter the server name and URL (e.g., `http://localhost:11434`)
-4. Save the server
+### Running Tests
+1. Select a server from your dashboard
+2. Choose a model to test
+3. Configure test parameters (prompts, temperature, etc.)
+4. Start the test
+5. View real-time results as they are generated
 
-### Testing Models
+### Comparing Test Results
+1. Navigate to the "Tests" section
+2. Select multiple test runs to compare
+3. Review side-by-side comparisons of:
+   - Response quality
+   - Generation speed
+   - Token efficiency
+   - Server resource utilization
 
-1. From the servers list, click "View" on a server
-2. You'll see a list of available models on that server
-3. Click "Run Single Test" to test a specific model
-4. Select the model, enter a prompt, and set the number of iterations
-5. Click "Run Test" to execute
+## 🔒 Security
 
-### Testing Multiple Models
+### HTTPS Enforcement
+- The application automatically forces all URLs to use HTTPS when running in production mode
+- This behavior is controlled by the `APP_ENV` setting in your `.env` file
+- Set `APP_ENV=production` to enable HTTPS enforcement
+- No additional configuration is required for this security feature
 
-1. From the server view page, click "Test Multiple Models"
-2. Select the models you want to test
-3. Enter a prompt that will be sent to all selected models
-4. Set the number of iterations per model
-5. Click "Run Tests" to execute
+## 🧰 Technology Stack
 
-### Viewing and Comparing Results
+- **Backend**: Laravel PHP Framework
+- **Frontend**: Vue.js with Tailwind CSS
+- **Database**: MySQL/SQLite
+- **Styling**: Glassmorphic design with custom utility classes
 
-1. Navigate to the "Tests" tab for a server
-2. View individual test results by clicking "View"
-3. To compare multiple tests, select them using the checkboxes
-4. Click "Compare Selected Tests" to see a side-by-side comparison
+## 👥 Contributing
 
-## Queue Processing
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-Tests are processed in the background for better performance. Make sure to run the queue worker:
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-```
-php artisan queue:work --queue=ollama-tests
-```
+## 📝 License
 
-## License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). 
+## 🙏 Acknowledgements
+
+- [Ollama](https://github.com/ollama/ollama) for the amazing local LLM server
+- [Laravel](https://laravel.com/) for the robust PHP framework
+- [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework
+- [Vue.js](https://vuejs.org/) for the progressive JavaScript framework 
